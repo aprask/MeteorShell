@@ -11,6 +11,7 @@ public class WeatherDataCommands {
 
     private final JobService job;
 
+    @SuppressWarnings("unused")
     @ShellMethod(key = "runJob", value = "I will run the batch job procedure", group = "batch")
     private String runJob() {
         return job.runJob();

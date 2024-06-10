@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Report For Kids</title>
+    <link rel="stylesheet" type="text/css" href="/css/app.css?v=20240126" media="screen, print" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <meta name="description" content="The daily weather report designed for kids" />
+</head>
+
+<body class="">
+<div id="wrap">
+    <div id="header">
+            </div>
+
+    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+    <script>
+    kofiWidgetOverlay.draw('kidsweather', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Support Us',
+        'floating-chat.donateButton.background-color': '#00b9fe',
+        'floating-chat.donateButton.text-color': '#fff'
+    });
+    </script>
+
+    <div id="content">
+            <h1 class="center">Weather Report For Kids</h1>
+
+    <form action="/" method="post" id="location-form">
+    <input type="hidden" name="_token" value="eNgJCZ9W8RG4NKAE44F3RJMmN9g15UN0WBeDf5jh" autocomplete="off">    <p class="center">
+        <input type="hidden" name="action" value="setup" />
+        <input name="loc" value="" size="20" class="input" id="loc" placeholder="Where are you?"/>
+        <label><input type="radio" name="u" value="f"  checked/> Fahrenheit</label>
+        <label><input type="radio" name="u" value="c" /> Celsius</label>
+        <input type="submit" class="button" value="Get Weather" />
+        &nbsp;
+        <a href="/help">Need help?</a>
+    </p>
+
+    </form>
+
+    
+    <div class="location">
+        <h2>
+            Hello, Mooresville!
+        </h2>
+    </div>
+
+    <div class="forecast">
+        <h2>
+            Right now it is 86 °F
+        </h2>
+                    <h2 class="feelslike">(but it <i>feels like</i> 91 °F <a href="#" onclick="document.querySelector('#windchill').style.display='block'; return false;"><img src="/images/info.svg" alt="Question mark icon for more info"></a>)</h2>
+            <p class="info-box" id="windchill" style="display: none">
+                Wind and humidity can make you feel colder or hotter.
+                Humidity is how damp the air feels.
+                When it's windy and wet your body loses heat more quickly.
+                That's why it feels even colder on some days and you might need to wear extra clothes to stay warm and dry!
+            </p>
+        
+        <h3>
+            Today's forecast: Patchy rain nearby
+            63...88 °F
+        </h3>
+
+        <div class="extra">
+                            <span>
+                    <label>Wind</label> 13mph 
+                </span>
+                        <span>
+                <label>Humidity</label> 62%
+            </span>
+            <span>
+                <label>UV Index</label> 8
+            </span>
+            <span>
+                <label>Precipitation</label> 0.2 inches
+            </span>
+        </div>
+
+        <div class="conditions">
+            <img src="/images/condition_rain.png" alt="88" />
+        </div>
+
+        <div class="temperature">
+            <img src="/images/temp_warm_rain.png" alt="88" class="clothes" />
+        </div>
+    </div>
+
+    <div class="forecast">
+        <h3>
+            Tomorrow's forecast:
+            Patchy rain nearby
+            60...81 °F
+        </h3>
+
+        <div class="extra">
+                            <span>
+                    <label>Wind</label> 10mph
+                </span>
+                        <span>
+                <label>Humidity</label> 64%
+            </span>
+            <span>
+                <label>UV Index</label> 9
+            </span>
+            <span>
+                <label>Precipitation</label> 0 inches
+            </span>
+        </div>
+
+        <div class="conditions">
+            <img src="/images/condition_rain.png" alt="81" />
+        </div>
+
+        <div class="temperature">
+            <img src="/images/temp_cool_rain.png" alt="81" class="clothes" />
+        </div>
+    </div>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <div class="center">
+        <h3>Share this weather report with Google Classroom</h3>
+        <g:sharetoclassroom url="https://kidsweatherreport.com/report/mooresville/f" size="96"
+                            title="Weather Report for Kids: Mooresville"
+                            body="Current weather conditions for Mooresville. Weather Report for Kids is a simple way to show young children the weather forecast for the current day so that they can dress themselves appropriately.">
+        </g:sharetoclassroom>
+    </div>
+    </div>
+
+    <div id="footer">
+        <p>
+            <b>Can you spare a few dollars to help cover our costs?</b>
+        </p>
+        <p>
+            Click the button below to chip in. Every bit helps! Thank you!
+            <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Kids Weather', '#2398db', 'C0C8S9UF');kofiwidget2.draw();</script>
+        </p>
+
+        <p>
+            Copyright © 2024 <a href="https://johnwatsonllc.com/" target="_blank">KidsWeatherReport.com</a> | <a href="/privacy">Privacy Policy</a>
+        </p>
+
+        <p>
+            <i>If you like this service, please tell a friend!</i>
+        </p>
+
+        <p>
+            Powered by <a href="https://www.weatherapi.com/" title="Weather API" target="_blank">WeatherAPI.com</a>
+        </p>
+    </div>
+
+</div> <!-- wrap -->
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "80d19fe95ae4468da69b4d0cadd2cafb"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

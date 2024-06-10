@@ -8,14 +8,19 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 @Service
 @RequiredArgsConstructor
-public class JobService {
+@SuppressWarnings("unused")
+public class WeatherService {
 
     private final JobLauncher jobLauncher;
     private final Job job;
 
-    @SuppressWarnings("unused")
     public String runJob() {
         try {
             JobParameters jobParameters = new JobParametersBuilder()
@@ -32,5 +37,8 @@ public class JobService {
                  JobParametersInvalidException | JobRestartException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void retrieveWeather(String location) {
     }
 }

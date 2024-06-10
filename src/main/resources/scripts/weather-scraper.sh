@@ -1,5 +1,5 @@
 #!/bin/bash
-#weather scraper for weather data into csv
+#weather scraper for weather data into txt
 
 #CHECKING FOR CURL
 if ! command -v curl &> /dev/null; then
@@ -20,7 +20,6 @@ fi
 location="$1"
 curl=$(which curl)
 url="https://kidsweatherreport.com/report/$location"
-regex=": $location"
 
 #LOGIC
 outfile="output.txt"
@@ -35,7 +34,11 @@ function check_for_err() {
 }
 
 function strip_html() {
-  grep "Today's forecast" "$outfile" | sed 's/<[^>]*>//g' | sed 's/^[ \t]*//' > tmp.txt && cp tmp.txt "$outfile"
+  grep "Right now it is" "$outfile" | sed 's/<[^>]*>//g' | sed 's/^[ \t]*//' > tmp.txt && cp tmp.txt "$outfile"
+}
+
+function add_location() {
+  echo "$location" >> "$outfile"
 }
 
 function get_weather() {
@@ -49,6 +52,7 @@ function get_weather() {
 ###############################
 dump_webpage
 strip_html
+add_location
 get_weather
 
 rm tmp.txt

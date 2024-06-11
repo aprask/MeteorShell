@@ -36,5 +36,10 @@ out/
 ### VS Code ###
 .vscode/
 
+### Resources ###
 src/main/resources/application.yml
+
+### Scrape ###
+src/main/resources/scripts/unclean-output.txt
 src/main/resources/scripts/output.txt
+src/main/resources/weather.csv

@@ -8,7 +8,7 @@ if ! command -v curl &> /dev/null; then
 fi
 
 #IF PREVIOUS RUN
-rm -f output.txt
+rm -f unclean-output.txt
 
 #CHECKING PARAMETERS (must be equal to 3 parameters)
 if [ "$#" -ne 1 ]; then
@@ -55,7 +55,7 @@ strip_html
 add_location
 get_weather
 
-rm tmp.txt
+rm -f tmp.txt
 
 echo "Weather data has been scraped for $location"
 

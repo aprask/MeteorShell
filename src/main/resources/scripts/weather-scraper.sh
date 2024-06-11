@@ -8,7 +8,7 @@ if ! command -v curl &> /dev/null; then
 fi
 
 #IF PREVIOUS RUN
-rm -f unclean-output.txt
+rm -f output.txt
 
 #CHECKING PARAMETERS (must be equal to 3 parameters)
 if [ "$#" -ne 1 ]; then
@@ -46,6 +46,8 @@ function get_weather() {
     echo "${weather}"
   done < "$outfile"
 }
+
+
 
 ###############################
 #           MAIN              #

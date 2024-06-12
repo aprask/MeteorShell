@@ -6,10 +6,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import weatherapp.api.weathercommandapp.service.WeatherService;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 @ShellComponent
 @RequiredArgsConstructor
@@ -26,15 +23,40 @@ public class WeatherDataCommands {
     @ShellMethod(key = "gw", value = "Enter a location to get the weather for that location", group = "weather")
     public void getWeatherResponse(@ShellOption(help = "The location of interest") String location) {
 
-        String scriptPath = "src/main/resources/scripts/weather-scraper.sh";
-        String outputFile = "src/main/resources/scripts/unclean-output.txt";
+        String scrapingScriptPath = "src/main/resources/scripts/weather-scraper.sh";
+        String scrapingScriptOutput = "src/main/resources/scripts/output.txt";
 
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(scriptPath, location);
+            ProcessBuilder processBuilder = new ProcessBuilder(scrapingScriptPath, location);
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            FileWriter writer = new FileWriter(outputFile);
+            FileWriter writer = new FileWriter(scrapingScriptOutput);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.write('\n');
+            }
+            cleanData(new File("src/main/resources/scripts/output.txt"));
+            process.waitFor();
+            writer.close();
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @ShellMethod(key = "cln", value = "Clean data", group = "util")
+    private void cleanData(@ShellOption(help = "Passed in file for cleaning") File file) {
+
+        String cleaningScriptPath = "src/main/resources/scripts/clean-weather-data.sh";
+        String cleaningScriptOutput = "src/main/resources/scripts/output.txt";
+
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder(cleaningScriptPath, file.getPath());
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            FileWriter writer = new FileWriter(cleaningScriptOutput);
             String line;
             while ((line = reader.readLine()) != null) {
                 writer.write(line);
@@ -46,7 +68,6 @@ public class WeatherDataCommands {
             throw new RuntimeException(e);
         }
     }
-
 
 
 }

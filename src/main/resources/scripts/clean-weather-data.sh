@@ -31,8 +31,5 @@ add_temp
 
 rm -f unclean-output.txt
 
-if [ "$?" = 0 ]
-then
-  echo "Location: $location"
-  echo "Temperature: $temp"
-fi
+echo "$location"
+echo "$temp"

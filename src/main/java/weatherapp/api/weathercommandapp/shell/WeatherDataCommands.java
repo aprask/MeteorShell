@@ -37,7 +37,6 @@ public class WeatherDataCommands {
                 writer.write(line);
                 writer.write('\n');
             }
-            cleanData(new File("src/main/resources/scripts/output.txt"));
             process.waitFor();
             writer.close();
         } catch (IOException | InterruptedException e) {
@@ -46,28 +45,34 @@ public class WeatherDataCommands {
     }
 
     @ShellMethod(key = "cln", value = "Clean data", group = "util")
-    private void cleanData(@ShellOption(help = "Passed in file for cleaning") File file) {
-
+    public void cleanData(@ShellOption(help = "Pass in file for cleaning") File file) {
         String cleaningScriptPath = "src/main/resources/scripts/clean-weather-data.sh";
         String cleaningScriptOutput = "src/main/resources/scripts/output.txt";
 
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(cleaningScriptPath, file.getPath());
-            processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            FileWriter writer = new FileWriter(cleaningScriptOutput);
-            String line;
-            while ((line = reader.readLine()) != null) {
-                writer.write(line);
-                writer.write('\n');
+            File scriptFile = new File(cleaningScriptPath);
+            if (!scriptFile.exists() || !scriptFile.canExecute()) {
+                throw new RuntimeException("Script file does not exist or is not executable: " + cleaningScriptPath);
             }
-            process.waitFor();
-            writer.close();
+            ProcessBuilder processBuilder = new ProcessBuilder(cleaningScriptPath, file.getAbsolutePath());
+            processBuilder.redirectErrorStream(true);
+
+            Process process = processBuilder.start();
+
+            try (BufferedReader stdOutput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                 BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                 BufferedWriter writer = new BufferedWriter(new FileWriter(cleaningScriptOutput))) {
+
+                String line;
+                while ((line = stdOutput.readLine()) != null) {
+                    writer.write(line);
+                    writer.write('\n');
+                }
+                writer.close();
+                process.waitFor();
+            }
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("An error occurred while executing the script.", e);
         }
     }
-
-
 }

@@ -1,2 +1,8 @@
-mooresville
-65
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  5173    0  5173    0     0  14903      0 --:--:-- --:--:-- --:--:-- 14950
+Right now it is 63 °F
+huntsville
+Weather data has been scraped for huntsville

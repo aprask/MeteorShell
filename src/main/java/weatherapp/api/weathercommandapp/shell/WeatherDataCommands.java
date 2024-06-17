@@ -10,7 +10,6 @@ import java.io.*;
 
 @ShellComponent
 @RequiredArgsConstructor
-@SuppressWarnings("unused")
 public class WeatherDataCommands {
 
     private final WeatherService weatherService;
@@ -60,7 +59,6 @@ public class WeatherDataCommands {
             Process process = processBuilder.start();
 
             try (BufferedReader stdOutput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                 BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
                  BufferedWriter writer = new BufferedWriter(new FileWriter(cleaningScriptOutput))) {
 
                 String line;
@@ -74,5 +72,11 @@ public class WeatherDataCommands {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("An error occurred while executing the script.", e);
         }
+    }
+
+    @ShellMethod(key = "csv", value = "Convert data to csv", group = "util")
+    public void convertData(@ShellOption(help = "Pass in file for conversion") File file) {
+        String conversionScriptPath = "src/main/resources/scripts/convert-to-csv.sh";
+        String conversionScriptOutput = "src/main/resources/scripts/output.csv";
     }
 }

@@ -1,8 +1,10 @@
-weatherapp/api/weathercommandapp/shell/WeatherDataCommands.class
-weatherapp/api/weathercommandapp/service/JobService.class
-weatherapp/api/weathercommandapp/config/WeatherProcessor.class
+weatherapp/api/weathercommandapp/service/WeatherService.class
 weatherapp/api/weathercommandapp/config/BatchConfig.class
 weatherapp/api/weathercommandapp/mapper/WeatherMapper.class
-weatherapp/api/weathercommandapp/WeatherCommandAppApplication.class
 weatherapp/api/weathercommandapp/model/Weather.class
+weatherapp/api/weathercommandapp/service/WeatherService$ProcessReader.class
+weatherapp/api/weathercommandapp/shell/WeatherDataCommands.class
+weatherapp/api/weathercommandapp/config/WeatherProcessor.class
+weatherapp/api/weathercommandapp/WeatherCommandAppApplication.class
 weatherapp/api/weathercommandapp/repo/WeatherDataRepository.class
+weatherapp/api/weathercommandapp/dto/WeatherDto.class

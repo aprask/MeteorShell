@@ -1,18 +1,19 @@
 package weatherapp.api.weathercommandapp.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
+import weatherapp.api.weathercommandapp.dto.WeatherDto;
 import weatherapp.api.weathercommandapp.model.Weather;
 
-public class WeatherProcessor implements ItemProcessor<Weather, Weather> {
+import java.util.Random;
 
-    private static final Logger logger = LoggerFactory.getLogger(WeatherProcessor.class);
+public class WeatherProcessor implements ItemProcessor<WeatherDto, Weather> {
 
     @Override
-    public Weather process(Weather weather) {
-        logger.info("Processing weather data: {}", weather);
-        weather.setId(null);
+    public Weather process(WeatherDto weatherDto) {
+        Weather weather = new Weather();
+        weather.setId(new Random().nextLong());
+        weather.setTemp(weatherDto.getTemp());
+        weather.setLocation(weatherDto.getLocation());
         return weather;
     }
 }

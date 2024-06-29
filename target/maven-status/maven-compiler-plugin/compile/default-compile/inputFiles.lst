@@ -1,8 +1,9 @@
 /home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/WeatherCommandAppApplication.java
 /home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/config/BatchConfig.java
 /home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/config/WeatherProcessor.java
+/home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/dto/WeatherDto.java
 /home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/mapper/WeatherMapper.java
 /home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/model/Weather.java
 /home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/repo/WeatherDataRepository.java
-/home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/service/JobService.java
+/home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/service/WeatherService.java
 /home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/src/main/java/weatherapp/api/weathercommandapp/shell/WeatherDataCommands.java

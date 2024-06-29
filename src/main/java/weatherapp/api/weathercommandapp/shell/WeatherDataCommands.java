@@ -41,10 +41,11 @@ public class WeatherDataCommands {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+        cleanData();
+        convertData();
     }
 
-    @ShellMethod(key = "cln", value = "Clean data", group = "util")
-    public void cleanData(@ShellOption(help = "Pass in file for cleaning") File file) {
+    public void cleanData() {
         String cleaningScriptPath = "src/main/resources/scripts/clean-weather-data.sh";
         String cleaningScriptOutput = "src/main/resources/scripts/output.txt";
 
@@ -53,13 +54,38 @@ public class WeatherDataCommands {
             if (!scriptFile.exists() || !scriptFile.canExecute()) {
                 throw new RuntimeException("Script file does not exist or is not executable: " + cleaningScriptPath);
             }
-            ProcessBuilder processBuilder = new ProcessBuilder(cleaningScriptPath, file.getAbsolutePath());
+            ProcessBuilder processBuilder = new ProcessBuilder(cleaningScriptPath, cleaningScriptOutput);
+            processBuilder.redirectErrorStream(true);
+
+            Process process = processBuilder.start();
+
+            try {
+                process.waitFor();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("An error occurred while executing the script.", e);
+        }
+    }
+
+    public void convertData() {
+        String outputPath = "output.txt";
+        String conversionScriptPath = "src/main/resources/scripts/csv-convert.sh";
+        String conversionScriptOutput = "src/main/resources/scripts/output.csv";
+
+        try {
+            File scriptFile = new File(conversionScriptPath);
+            if (!scriptFile.exists() || !scriptFile.canExecute()) {
+                throw new RuntimeException("Script file does not exist or is not executable: " + conversionScriptPath);
+            }
+            ProcessBuilder processBuilder = new ProcessBuilder(conversionScriptPath, outputPath);
             processBuilder.redirectErrorStream(true);
 
             Process process = processBuilder.start();
 
             try (BufferedReader stdOutput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                 BufferedWriter writer = new BufferedWriter(new FileWriter(cleaningScriptOutput))) {
+                 BufferedWriter writer = new BufferedWriter(new FileWriter(conversionScriptOutput))) {
 
                 String line;
                 while ((line = stdOutput.readLine()) != null) {
@@ -74,9 +100,4 @@ public class WeatherDataCommands {
         }
     }
 
-    @ShellMethod(key = "csv", value = "Convert data to csv", group = "util")
-    public void convertData(@ShellOption(help = "Pass in file for conversion") File file) {
-        String conversionScriptPath = "src/main/resources/scripts/convert-to-csv.sh";
-        String conversionScriptOutput = "src/main/resources/scripts/output.csv";
-    }
 }

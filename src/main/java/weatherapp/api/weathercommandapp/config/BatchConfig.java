@@ -17,6 +17,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
+import weatherapp.api.weathercommandapp.dto.WeatherDto;
 import weatherapp.api.weathercommandapp.mapper.WeatherMapper;
 import weatherapp.api.weathercommandapp.model.Weather;
 import weatherapp.api.weathercommandapp.repo.WeatherDataRepository;
@@ -31,9 +32,9 @@ public class BatchConfig {
     private final JobRepository jobRepository;
 
     @Bean
-    public FlatFileItemReader<Weather> reader() {
-        FlatFileItemReader<Weather> itemReader = new FlatFileItemReader<>();
-        itemReader.setResource(new FileSystemResource("src/main/resources/weather.csv"));
+    public FlatFileItemReader<WeatherDto> reader() {
+        FlatFileItemReader<WeatherDto> itemReader = new FlatFileItemReader<>();
+        itemReader.setResource(new FileSystemResource("/home/andrewpraskala/Programming/WeatherCLI/WeatherCommandApp/output.csv"));
         itemReader.setName("csvReader");
         itemReader.setLinesToSkip(1);
         itemReader.setLineMapper(lineMapper());
@@ -56,7 +57,7 @@ public class BatchConfig {
     @Bean
     public Step importStep() {
         return new StepBuilder("csvImport", jobRepository)
-                .<Weather, Weather>chunk(10, platformTransactionManager)
+                .<WeatherDto, Weather>chunk(10, platformTransactionManager)
                 .reader(reader())
                 .processor(processor())
                 .writer(writer())
@@ -78,12 +79,12 @@ public class BatchConfig {
         return asyncTaskExecutor;
     }
 
-    private LineMapper<Weather> lineMapper() {
-        DefaultLineMapper<Weather> lineMapper = new DefaultLineMapper<>();
+    private LineMapper<WeatherDto> lineMapper() {
+        DefaultLineMapper<WeatherDto> lineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
-        String[] tokens = { "id", "location", "date", "temp" };
+        String[] tokens = { "location", "temp" };
         lineTokenizer.setNames(tokens);
 
         lineMapper.setLineTokenizer(lineTokenizer);

@@ -1,0 +1,8 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  5158    0  5158    0     0   5456      0 --:--:-- --:--:-- --:--:--  5458
+Right now it is 66 °F
+toronto
+Weather data has been scraped for toronto

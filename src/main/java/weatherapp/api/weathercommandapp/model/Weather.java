@@ -21,7 +21,5 @@ public class Weather {
 
     private String location;
 
-    private LocalDate date;
-
     private int temp;
 }
